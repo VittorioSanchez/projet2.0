@@ -113,15 +113,14 @@ class GameOver(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.font = pygame.font.SysFont("arial", 30)
-        self.image = pygame.image.load('img/Game_over.jpeg')
-        self.text = "GAME OVER!! press SPACE to exit"
+        self.image = pygame.image.load('img/Game_over.jpeg').convert()
         self.rect = self.image.get_rect()
-        
-    def update(self):
+        self.text = "press SPACE to exit"
         self.image2 = self.font.render(self.text,1,(255,255,0))
-        self.rect2 = self.image.get_rect()
-        self.rect2.top = 100
-        self.rect2.left = 25
+        self.image.blit(self.image2, (250,550))    
+        #self.rect2 = self.image.get_rect()
+        #self.rect2.top = 100
+        #self.rect2.left = 25
         #bd.Interface(final)
         
             
@@ -508,7 +507,6 @@ def game(activ_musique,activ_son,mode):
             gameover.add(GameOver())
             rectgameover = gameover.draw(screen)
             pygame.display.update(rectgameover)
-            gameover.update()
             pygame.mixer.music.stop()
             while not GAMEOVER:
                 for event in pygame.event.get():
