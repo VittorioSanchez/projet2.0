@@ -134,7 +134,7 @@ class StatusDisplay(pygame.sprite.Sprite):
         points = 0
         self.munition = munitions
         self.font = pygame.font.SysFont("arial", 24)
-        self.text = "LIVES: %d  MUNITIONS: %d                                                       MISSILE HITS: %d   SCORE %d" % (life, self.munition, self.score , points)
+        self.text = "LIVES: %d    MUNITIONS: %d    MISSILE HITS: %d    SCORE: %d" % (life, self.munition, self.score , points)
         self.image = self.font.render(self.text, 1, (0, 255, 0))
         self.rect = self.image.get_rect()
         self.i=1
@@ -155,7 +155,7 @@ class StatusDisplay(pygame.sprite.Sprite):
             self.score += 1
         secondes = (time/1000) - self.time0
         points = (self.score)*10 + secondes            
-        self.text = "LIVES: %d  MUNITIONS: %d                                                       MISSILE HITS: %d   SCORE %d" % (life, self.munition, self.score , points)
+        self.text = "LIVES: %d    MUNITIONS: %d    MISSILE HITS: %d    SCORE: %d" % (life, self.munition, self.score , points)
         self.image = self.font.render(self.text, 1, (0, 255, 0))
         self.rect = self.image.get_rect()
         final=int(points)
