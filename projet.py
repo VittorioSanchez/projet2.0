@@ -24,7 +24,7 @@ class Menu:
     champ = []
     taille_police = 48
     police = pygame.font.Font
-    font_path = 'trench.ttf'
+    font_path = 'font/trench.ttf'
     dest_surface = pygame.Surface
     curseur = 0
     couleur_fond = (51,51,51)
@@ -113,7 +113,7 @@ class GameOver(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.font = pygame.font.SysFont("arial", 30)
-        self.image = pygame.image.load('Game_over.jpeg')
+        self.image = pygame.image.load('img/Game_over.jpeg')
         self.text = "GAME OVER!! press SPACE to exit"
         self.rect = self.image.get_rect()
         
@@ -164,7 +164,7 @@ class StatusDisplay(pygame.sprite.Sprite):
 class Meteorite(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('Meteor.png').convert_alpha()
+        self.image = pygame.image.load('img/Meteor.png').convert_alpha()
         self.image.set_colorkey((255,0,255))
         self.rect = self.image.get_rect()
         self.rect.topright = [780,random.randrange(0,MAX_Y)]
@@ -193,9 +193,9 @@ class Ennemis(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.animation = random.randrange(0,2)
         if self.animation == 0:
-            self.image = pygame.image.load('vaisseau_rouge.png')
+            self.image = pygame.image.load('img/vaisseau_rouge.png')
         else:
-            self.image = pygame.image.load('vaisseau_gris.png')
+            self.image = pygame.image.load('img/vaisseau_gris.png')
         self.rect = self.image.get_rect()
         self.rect.topleft = [780,random.randrange(0,MAX_Y)]
         self.direction = [random.randrange(-4,-1),random.randrange(-4,4)]
@@ -218,7 +218,7 @@ class Ennemis(pygame.sprite.Sprite):
 class BaseShip(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('vaisseau_3_vies.png').convert_alpha()
+        self.image = pygame.image.load('img/vaisseau_3_vies.png').convert_alpha()
         self.image.set_colorkey((255,0,255))
         self.rect = self.image.get_rect()
         self.rect.topleft = [0, 200]
@@ -226,11 +226,11 @@ class BaseShip(pygame.sprite.Sprite):
 
     def update(self,direction,life):
         if life == 2:
-            self.image=pygame.image.load('vaisseau_2_vies.png')
+            self.image=pygame.image.load('img/vaisseau_2_vies.png')
         elif life == 1:
-            self.image=pygame.image.load('vaisseau_1_vie.png')
+            self.image=pygame.image.load('img/vaisseau_1_vie.png')
         elif life == 3:
-            self.image=pygame.image.load('vaisseau_3_vies.png')
+            self.image=pygame.image.load('img/vaisseau_3_vies.png')
         if direction == 0 and self.rect.top > MIN_Y:  #UP
             self.rect.top -= 7           
         if direction == 1 and self.rect.bottom < MAX_Y:   #DOWN
@@ -244,7 +244,7 @@ class BaseShip(pygame.sprite.Sprite):
 class Missile(pygame.sprite.Sprite):
     def __init__(self, initialposition):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('munition.png').convert()
+        self.image = pygame.image.load('img/munition.png').convert()
         self.image.set_colorkey((255,0,255))
         self.rect = self.image.get_rect()
         self.rect.topleft = initialposition
@@ -260,7 +260,7 @@ class Explosion(pygame.sprite.Sprite):
     def __init__(self, initialposition):
         pygame.sprite.Sprite.__init__(self)
         self.imagearray=[]
-        self.images = pygame.image.load('explosion.bmp').convert()
+        self.images = pygame.image.load('img/explosion.bmp').convert()
         self.images.set_colorkey((255,0,255))
         for i in range(0,240,60):
             self.imagearray.append(self.images.subsurface((i,0,60,60)))
@@ -283,7 +283,7 @@ class BonusVie(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.animation = random.randrange(0,2)
-        self.image = pygame.image.load('power_up_vie.png')
+        self.image = pygame.image.load('img/power_up_vie.png')
         self.rect = self.image.get_rect()
         self.rect.topleft = [780,random.randrange(0,MAX_Y)]
         self.direction = [random.randrange(-4,-1),random.randrange(-4,4)]
@@ -307,7 +307,7 @@ class BonusMunition(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.animation = random.randrange(0,2)
-        self.image = pygame.image.load('power_up_ammo.png').convert_alpha()
+        self.image = pygame.image.load('img/power_up_ammo.png').convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.topleft = [780,random.randrange(0,MAX_Y)]
         self.direction = [random.randrange(-4,-1),random.randrange(-4,4)]
@@ -330,11 +330,11 @@ class BonusMunition(pygame.sprite.Sprite):
 class Sounds():
     def __init__(self):
         pygame.mixer.pre_init(44000, 16, 2, 4096)
-        self.missile = pygame.mixer.Sound('missile.wav')
-        self.explosion = pygame.mixer.Sound('explosion.wav')
-        self.basehit = pygame.mixer.Sound('basehit.wav')
-        self.alerte = pygame.mixer.Sound('alerte.wav')
-        self.bonus = pygame.mixer.Sound('power-up.wav')
+        self.missile = pygame.mixer.Sound('sound/missile.wav')
+        self.explosion = pygame.mixer.Sound('sound/explosion.wav')
+        self.basehit = pygame.mixer.Sound('sound/basehit.wav')
+        self.alerte = pygame.mixer.Sound('sound/alerte.wav')
+        self.bonus = pygame.mixer.Sound('sound/power-up.wav')
         
     def playmissile(self):
         self.missile.play()
@@ -374,13 +374,13 @@ def game(activ_musique,activ_son,mode):
     pygame.init()
 
     pygame.mixer.pre_init(44000, 16, 2, 4096)
-    missile = pygame.mixer.Sound('missile.wav')
-    explosion = pygame.mixer.Sound('explosion.wav')
-    basehit = pygame.mixer.Sound('basehit.wav')
-    alerte = pygame.mixer.Sound('alerte.wav')
-    bonus = pygame.mixer.Sound('power-up.wav')
+    missile = pygame.mixer.Sound('sound/missile.wav')
+    explosion = pygame.mixer.Sound('sound/explosion.wav')
+    basehit = pygame.mixer.Sound('sound/basehit.wav')
+    alerte = pygame.mixer.Sound('sound/alerte.wav')
+    bonus = pygame.mixer.Sound('sound/power-up.wav')
     if activ_musique == 1:
-        pygame.mixer.music.load('space.mp3')
+        pygame.mixer.music.load('sound/space.mp3')
         pygame.mixer.music.play(1)
     if activ_son == 0:
         missile.set_volume(0)
@@ -403,7 +403,7 @@ def game(activ_musique,activ_son,mode):
     
     statusdisplay.add(StatusDisplay())    
     baseship.add(BaseShip())
-    background = pygame.image.load('background.jpg')
+    background = pygame.image.load('img/background.jpg')
     screen.blit(background,(0,0))
     pygame.display.update()    
     ennemis.add(Ennemis())
@@ -573,7 +573,7 @@ l'autre vous offrira des reparations (1 vie recuperee)
 
 Bonne chance :) """
                             pygame.font.init()
-                            font = pygame.font.Font('trench.ttf',24)
+                            font = pygame.font.Font('font/trench.ttf',24)
                             height = font.get_height()*1.3
                             x,y = 20,20
                             for ligne in text.splitlines():
