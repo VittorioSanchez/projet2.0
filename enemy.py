@@ -1,28 +1,27 @@
-import ship
-
-"""Class representing a player
+"""Class representing a ennemy
 """
 
-class Enemy(Ship):
-    pass
-    '''Direction dir;
-    Constructeur par defaut
-    Ennemi()
-    {
-      dir = GAUCHE;
-      setPosX(20); //Vaisseau tout à gauche
-      setPosY(rand()%15);//setPosY(terrain.gethauteur()/2); //Vaisseau au milieu de la hauteur du terrain
-      pt_vie = 1;
-    }
-    Ennemi(const int &X, const int &Y, const Direction &direc, const int &vie)
-    {
-      posX = X;
-      posY = Y;
-      dir = direc;
-      pt_vie = vie;
-    }
+import app_logger
+import ship
 
-    //Accesseurs
-    Direction getDir() const;
-    void setDir(const Direction );
-    void setPosInit();'''
+class Enemy(Ship):
+  """Class representing a ennemy
+  """
+  
+  _logger = app_logger.get_logger(__name__)
+
+  def __init__(self, x: int = 0, y: int = 0, direction: direction: Direction = LEFT, life_pt: int = 1):
+    """Enemy class constructor
+
+    Args:
+        x (int): Coordinate along the x axis. Defaults to 0.
+        y (int): Coordinate along the y axis. Defaults to 0.
+        direction (direction, optional): Direction of enemy movement. Defaults to LEFT.
+        life_pt (int, optional): Number of enemy life points. Defaults to 1.
+    """
+
+    self._position = Positiion(x, y) #May be change the default starting position
+
+    self._direction = direction
+
+    self._life_pt = life_pt #Ship's remaining life

@@ -1,7 +1,8 @@
-import projectile
-
 """Class representing a vessel (mother of player and enemy)
 """
+
+import app_logger
+import projectile
 
 class Ship:
     """Class representing a vessel (mother of player and enemy)
@@ -10,10 +11,17 @@ class Ship:
     #friend class Jeu;
     #friend class Terrain;
 
+    _logger = app_logger.get_logger(__name__)
+
     def __init__(self, x: int = 0, y: int = 0):
+        """Ship class constructor
+
+        Args:
+            x (int): Coordinate along the x axis. Defaults to 0.
+            y (int): Coordinate along the y axis. Defaults to 0.
+        """
         #Location
-        self._x = x
-        self._y = y
+        self._position = Positiion(x, y)
         
         #Hit box => TO MODIFY
         self._width = 0
@@ -36,54 +44,29 @@ class Ship:
         self.life = self.life - damage
 
     @property
-    def x(self):
+    def position(self):
         """Attribute getter
 
         Returns:
             (Type of attribute): Value of attribute (Position, int...)
         """
-        if self._x is not None:
-            return self._x
+        if self._position is not None:
+            return self._position
 
-    @x.setter
-    def x(self, value):
+    @position.setter
+    def position(self, value):
         """Attribute setter
 
         Args:
             value (Type of attribute): Value of attribute (Position, int...)
         """
-        self._x = value
+        self._position = value
 
-    @x.deleter
-    def x(self):
+    @position.deleter
+    def position(self):
         """Attribute "destructor"
         """
-        self._x = None
-    
-    @property
-    def y(self):
-        """Attribute getter
-
-        Returns:
-            (Type of attribute): Value of attribute (Position, int...)
-        """
-        if self._y is not None:
-            return self._y
-
-    @y.setter
-    def y(self, value):
-        """Attribute setter
-
-        Args:
-            value (Type of attribute): Value of attribute (Position, int...)
-        """
-        self._y = value
-
-    @y.deleter
-    def y(self):
-        """Attribute "destructor"
-        """
-        self._y = None
+        self._position = None
 
     @property
     def width(self):
